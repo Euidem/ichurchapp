@@ -6,7 +6,7 @@ import {
   Platform,
   TouchableOpacity,
   BackHandler,
-  I18nManager
+  I18nManager,
 } from "react-native";
 import { Container, Right, Left, Content, Body, Header } from "native-base";
 // Screen Styles
@@ -20,12 +20,15 @@ export default class NewsDetails extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
+  loadPage() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       that.props.navigation.navigate("Social");
       return true;
     });
+  }
+  componentDidMount() {
+    this.loadPage();
   }
 
   render() {
@@ -94,8 +97,8 @@ export default class NewsDetails extends Component {
                       {
                         textAlign: "center",
                         fontWeight: "700",
-                        fontSize: 18
-                      }
+                        fontSize: 18,
+                      },
                     ]}
                   >
                     Details

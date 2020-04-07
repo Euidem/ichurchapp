@@ -3,7 +3,7 @@
     "name": "iChurch",
     "slug": "iChurch",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "37.0.0",
     "android": {
       "package": "com.davolusoft.ichurch",
       "config": {
@@ -12,10 +12,17 @@
         }
       },
       "versionCode": 1,
-      "permissions": ["", "", ""],
+      "permissions": [
+        "",
+        "",
+        ""
+      ],
       "icon": "./assets/icon.png"
     },
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,7 +34,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },

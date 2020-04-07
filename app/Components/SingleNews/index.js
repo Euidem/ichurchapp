@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   BackHandler,
   I18nManager,
-  AsyncStorage
+  AsyncStorage,
 } from "react-native";
 import {
   Container,
@@ -19,7 +19,7 @@ import {
   Input,
   Form,
   Button,
-  Item
+  Item,
 } from "native-base";
 // Screen Styles
 import styles from "./styles";
@@ -29,9 +29,9 @@ import moment from "moment";
 import { FlatList } from "react-native-gesture-handler";
 import { GlobalVariables } from "../../../globals";
 export default class NewsDetails extends Component {
-  componentWillMount() {
+  loadBackHandler() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       that.props.navigation.navigate("Social");
       return true;
     });
@@ -43,11 +43,12 @@ export default class NewsDetails extends Component {
       comments: [],
       comment: "",
       newsId: "",
-      allowComments: false
+      allowComments: false,
     };
   }
 
   componentDidMount() {
+    this.loadBackHandler();
     this.confirmStatus();
     this.getComments();
   }
@@ -70,20 +71,20 @@ export default class NewsDetails extends Component {
   submit = () => {
     let { comment, comments } = this.state;
     const data = {
-      comment
+      comment,
     };
     fetch(`${GlobalVariables.apiNewsComment}/${this.state.newsId}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         console.log(response);
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
       });
     //Update UI with comment
@@ -107,7 +108,7 @@ export default class NewsDetails extends Component {
     </View>
   );
 
-  keyExtractor = item => item;
+  keyExtractor = (item) => item;
 
   render() {
     const { goBack } = this.props.navigation;
@@ -168,7 +169,7 @@ export default class NewsDetails extends Component {
                   style={{
                     textAlign: "center",
                     fontSize: 20,
-                    padding: 15
+                    padding: 15,
                   }}
                 >
                   Comments
@@ -190,13 +191,13 @@ export default class NewsDetails extends Component {
               style={{
                 bottom: 0,
                 position: "fixed",
-                width: "100%"
+                width: "100%",
               }}
             >
               <Item regular>
                 <Input
                   placeholder="Write comment"
-                  onChangeText={text => this.setState({ comment: text })}
+                  onChangeText={(text) => this.setState({ comment: text })}
                   returnKeyType="send"
                   onSubmitEditing={this.submit.bind(this)}
                   value={comment}

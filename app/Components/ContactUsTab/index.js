@@ -6,7 +6,7 @@ import {
   View,
   Image,
   AsyncStorage,
-  Alert
+  Alert,
 } from "react-native";
 import {
   Container,
@@ -18,7 +18,7 @@ import {
   Picker,
   Button,
   Icon,
-  Card
+  Card,
 } from "native-base";
 // Screen Styles
 import styles from "./styles";
@@ -32,22 +32,25 @@ export default class ContactUs extends Component {
       fontLoaded: false,
       selected2: undefined,
       loading: false,
-      content: ""
+      content: "",
     };
   }
-  async componentWillMount() {
+  async loadPage() {
     await Expo.Font.loadAsync({
       "SFUIDisplay-Medium": require("../../Fonts/SF-UI-Display-Medium.ttf"),
       "SFUIDisplay-Light": require("../../Fonts/SFUIDisplay-Light.ttf"),
       "SFUIDisplay-Regular": require("../../Fonts/SF-UI-Text-Regular.ttf"),
-      "SFUIDisplay-Semibold": require("../../Fonts/SFUIDisplay-Semibold.ttf")
+      "SFUIDisplay-Semibold": require("../../Fonts/SFUIDisplay-Semibold.ttf"),
     });
     this.setState({ fontLoaded: true });
+  }
+  componentDidMount() {
+    this.loadPage();
   }
 
   onValueChange2(value) {
     this.setState({
-      selected2: value
+      selected2: value,
     });
   }
 
@@ -56,7 +59,7 @@ export default class ContactUs extends Component {
     const { selected2, content } = this.state;
     const data = {
       content,
-      type: selected2
+      type: selected2,
     };
     const token = await AsyncStorage.getItem("user_id");
     if (token && token !== undefined) {
@@ -64,19 +67,19 @@ export default class ContactUs extends Component {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       })
-        .then(response =>
-          response.json().then(result => {
+        .then((response) =>
+          response.json().then((result) => {
             this.setState({ loading: false });
             if (result.statusCode === 200) {
               Alert.alert("Contact form submitted successfully...");
             }
           })
         )
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
@@ -101,7 +104,13 @@ export default class ContactUs extends Component {
             source={require("../../../assets/reachout.jpg")}
           />
           <View style={{ alignItems: "center", padding: 10 }}>
-            <Text style={{ fontSize: 20, margin: 10, fontWeight: "500" }}>
+            <Text
+              style={{
+                fontSize: 20,
+                margin: 10,
+                fontWeight: "500",
+              }}
+            >
               React Out
             </Text>
             <Text>
@@ -111,7 +120,11 @@ export default class ContactUs extends Component {
           </View>
 
           <Card
-            style={{ backgroundColor: "white", marginTop: 30, padding: 10 }}
+            style={{
+              backgroundColor: "white",
+              marginTop: 30,
+              padding: 10,
+            }}
           >
             <Form>
               <Item picker>
@@ -135,7 +148,7 @@ export default class ContactUs extends Component {
               <Item style={{ marginTop: 30 }} stackedLabel regular last>
                 <Label>Message</Label>
 
-                <Input onChangeText={content => this.setState({ content })} />
+                <Input onChangeText={(content) => this.setState({ content })} />
               </Item>
               {loading ? (
                 <Button style={styles.payBtn}>

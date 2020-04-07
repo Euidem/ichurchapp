@@ -6,7 +6,7 @@ import {
   Platform,
   TouchableOpacity,
   View,
-  FlatList
+  FlatList,
 } from "react-native";
 import { Content, Card, Container } from "native-base";
 // Screen Styles
@@ -21,37 +21,42 @@ export default class MenuScreen extends Component {
       isLoading: true,
       fontLoaded: false,
       data: [],
-      refreshing: false
+      refreshing: false,
     };
   }
 
-  async componentWillMount() {
+  async loadPage() {
     await Expo.Font.loadAsync({
       "SFUIDisplay-Medium": require("../../Fonts/SF-UI-Display-Medium.ttf"),
       "SFUIDisplay-Light": require("../../Fonts/SFUIDisplay-Light.ttf"),
       "SFUIDisplay-Regular": require("../../Fonts/SF-UI-Text-Regular.ttf"),
-      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf")
+      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf"),
     });
     this.setState({ fontLoaded: true });
   }
 
   componentDidMount() {
+    this.loadPage();
     this.getSermons();
   }
 
   getSermons = () => {
-    this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+    this.setState((prevState) => ({
+      refreshing: !prevState.refreshing,
+    }));
     fetch(GlobalVariables.allSermons)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ sermons }) => {
         this.setState({
           data: sermons,
-          refreshing: false
+          refreshing: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
-        this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+        this.setState((prevState) => ({
+          refreshing: !prevState.refreshing,
+        }));
       });
   };
 
@@ -67,7 +72,7 @@ export default class MenuScreen extends Component {
               audioUrl: item.audioUrl,
               youtubeUrl: item.youtubeUrl,
               preacher: item.preacher,
-              date: item.created_at
+              date: item.created_at,
             })
           }
         >
@@ -94,7 +99,7 @@ export default class MenuScreen extends Component {
     );
   }
 
-  _keyExtractor = item => item._id;
+  _keyExtractor = (item) => item._id;
 
   render() {
     StatusBar.setBarStyle("light-content", true);

@@ -7,7 +7,7 @@ import {
   FlatList,
   BackHandler,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
 
 import { Container } from "native-base";
@@ -17,16 +17,16 @@ import styles2 from "./styles2";
 import { View } from "react-native-animatable";
 import { GlobalVariables } from "../../../globals";
 import ScrollableTabView, {
-  ScrollableTabBar
+  ScrollableTabBar,
 } from "../react-native-scrollable-tab-view";
 import { Linking } from "expo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 //#endregion
 
 export default class Social05 extends Component {
-  componentWillMount() {
+  loadBackHandler() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       that.props.navigation.navigate("DrawerSocial");
       return true;
     });
@@ -37,41 +37,48 @@ export default class Social05 extends Component {
     this.state = {
       isLoading: true,
       data_about: {},
-      dataSource: []
+      dataSource: [],
     };
   }
 
   componentDidMount() {
+    this.loadBackHandler();
     this.getAbout();
     this.getPastors();
   }
 
   getAbout() {
     fetch(GlobalVariables.apiURLAbout)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ about }) => {
         this.setState({
-          data_about: about[0]
+          data_about: about[0],
         });
       })
-      .catch(error => {
-        this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+      .catch((error) => {
+        this.setState((prevState) => ({
+          refreshing: !prevState.refreshing,
+        }));
         console.warn(error);
       });
   }
 
   getPastors() {
-    this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+    this.setState((prevState) => ({
+      refreshing: !prevState.refreshing,
+    }));
     fetch(GlobalVariables.apiURLPastors)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ pastors }) => {
         this.setState({
-          dataSource: pastors
+          dataSource: pastors,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
-        this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+        this.setState((prevState) => ({
+          refreshing: !prevState.refreshing,
+        }));
       });
   }
 
@@ -97,9 +104,9 @@ export default class Social05 extends Component {
       </View>
     );
   }
-  _keyExtractor = item => item._id;
+  _keyExtractor = (item) => item._id;
 
-  _handlePress = link => {
+  _handlePress = (link) => {
     Linking.openURL(link);
   };
 

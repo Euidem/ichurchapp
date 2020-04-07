@@ -25,7 +25,7 @@ export default class WalkthroughTrackRide extends Component {
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     const token = await AsyncStorage.getItem("user_id");
     if (token && token !== undefined) {
       this.props.navigation.navigate("DrawerSocial");

@@ -5,8 +5,8 @@ const drawerStyles = {
   drawer: {
     shadowColor: "#000000",
     shadowOpacity: 0.8,
-    shadowRadius: 0
-  }
+    shadowRadius: 0,
+  },
 };
 import Drawer from "react-native-drawer";
 import MyControlPanel from "./ControlPanel";
@@ -36,25 +36,23 @@ export default class DrawerSocial extends Component {
       acceptPan: true,
       tapToClose: true,
       negotiatePan: false,
-      side: "left"
+      side: "left",
     };
   }
-  componentWillMount() {
-    /*setTimeout(() => {
-      this.drawer.open();
-    }, 1000);
-    
-    */
+  loadPage() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       // that.props.navigation.navigate("Drawer");
       return true;
     });
   }
+  componentDidMount() {
+    this.loadPage();
+  }
 
   setDrawerType(type) {
     this.setState({
-      drawerType: type
+      drawerType: type,
     });
   }
 
@@ -67,7 +65,7 @@ export default class DrawerSocial extends Component {
 
   noopChange() {
     this.setState({
-      changeVal: Math.random()
+      changeVal: Math.random(),
     });
   }
 
@@ -93,7 +91,7 @@ export default class DrawerSocial extends Component {
     return (
       <View style={styles.container}>
         <Drawer
-          ref={c => (this.drawer = c)}
+          ref={(c) => (this.drawer = c)}
           type={this.state.drawerType}
           animation={this.state.animation}
           openDrawerOffset={this.state.openDrawerOffset}
@@ -132,7 +130,7 @@ export default class DrawerSocial extends Component {
                     style={{
                       height: Metrics.HEIGHT * 0.07,
                       width: Metrics.WIDTH * 0.07,
-                      resizeMode: "contain"
+                      resizeMode: "contain",
                     }}
                   />
                 </TouchableOpacity>

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   BackHandler,
   I18nManager,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import {
   Container,
@@ -16,7 +16,7 @@ import {
   Content,
   Body,
   Header,
-  Icon
+  Icon,
 } from "native-base";
 // Screen Styles
 import styles from "./styles";
@@ -30,12 +30,15 @@ export default class Event extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
+  loadPage() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       that.props.navigation.navigate("Social");
       return true;
     });
+  }
+  componentDidMount() {
+    this.loadPage();
   }
 
   render() {

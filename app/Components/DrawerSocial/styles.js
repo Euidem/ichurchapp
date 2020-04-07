@@ -1,17 +1,17 @@
-import { StyleSheet, PixelRatio, Platform } from "react-native";
-const deviceScreen = require("Dimensions").get("window");
+import { StyleSheet, PixelRatio, Platform, Dimensions } from "react-native";
+const deviceScreen = Dimensions.get("window");
 import { Fonts, Metrics, Colors } from "../../Themes/";
 
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#2d324f"
+    backgroundColor: "#2d324f",
   },
   drawercontainer: {
     width: Metrics.WIDTH,
     height: Metrics.HEIGHT,
     backgroundColor: "#2d324f",
-    padding: 0
+    padding: 0,
   },
   headerSec: {
     backgroundColor: Colors.transparent,
@@ -22,34 +22,34 @@ module.exports = StyleSheet.create({
     ...Platform.select({
       ios: {},
       android: {
-        marginTop: Fonts.moderateScale(25)
-      }
+        marginTop: Fonts.moderateScale(25),
+      },
     }),
-    elevation: 0
+    elevation: 0,
   },
   left: {
     flex: 0.5,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   backArrow: {
     width: 30,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   body: {
     flex: 3,
     alignItems: "center",
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   textTitle: {
     color: "#fff",
     fontSize: Fonts.moderateScale(16),
     marginTop: 5,
-    alignSelf: "center"
+    alignSelf: "center",
     //////fontFamily: Fonts.type.sfuiDisplaySemibold,
   },
   right: {
-    flex: 0.5
+    flex: 0.5,
   },
   mainText: {
     color: "#0691ce",
@@ -61,7 +61,7 @@ module.exports = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     backgroundColor: "transparent",
-    top: Metrics.HEIGHT * 0.44
+    top: Metrics.HEIGHT * 0.44,
     //////fontFamily: Fonts.type.sfuiDisplayRegular,
   },
 
@@ -70,24 +70,24 @@ module.exports = StyleSheet.create({
     backgroundColor: "#2d324f",
     width: Metrics.WIDTH,
     height: Metrics.HEIGHT,
-    paddingTop: Fonts.moderateScale(25)
+    paddingTop: Fonts.moderateScale(25),
   },
   menucontrolPanel: {
     // flex: 1,
     paddingTop: Fonts.moderateScale(25),
-    paddingLeft: Fonts.moderateScale(20)
+    paddingLeft: Fonts.moderateScale(20),
   },
   userProfiles: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center"
+    alignItems: "center",
   },
   userImageStyle: {
     width: Metrics.WIDTH * 0.2,
     height: Metrics.WIDTH * 0.2,
     borderRadius: Metrics.WIDTH * 0.1,
     borderWidth: 2,
-    borderColor: Colors.snow
+    borderColor: Colors.snow,
     // marginLeft: 40
   },
   userDetailsStyle: {
@@ -95,26 +95,26 @@ module.exports = StyleSheet.create({
     alignItems: "flex-start",
     height: 50,
     justifyContent: "center",
-    marginLeft: 10
+    marginLeft: 10,
   },
   userDetailsText: {
     fontSize: Fonts.moderateScale(15),
-    color: Colors.snow
+    color: Colors.snow,
   },
   menumainview: {
-    marginTop: Fonts.moderateScale(25)
+    marginTop: Fonts.moderateScale(25),
   },
   listrow: {
     backgroundColor: "transparent",
     flexDirection: "row",
-    marginBottom: 15
+    marginBottom: 15,
   },
   rowtxt: {
     color: Colors.snow,
     fontSize: Fonts.moderateScale(18),
     backgroundColor: "transparent",
     marginLeft: Fonts.moderateScale(15),
-    textAlign: "left"
+    textAlign: "left",
     //////fontFamily: Fonts.type.sfuiDisplayLight,
   },
   notiCountSec: {
@@ -125,15 +125,15 @@ module.exports = StyleSheet.create({
     height: 17,
     width: 40,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   notiCount: {
     color: Colors.snow,
-    fontSize: Fonts.moderateScale(13)
+    fontSize: Fonts.moderateScale(13),
   },
   iconContainer: {
     width: 30,
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
   /*Menu Section END*/
 });

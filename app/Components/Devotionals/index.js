@@ -6,7 +6,7 @@ import {
   Platform,
   TouchableOpacity,
   FlatList,
-  I18nManager
+  I18nManager,
 } from "react-native";
 import {
   Container,
@@ -15,7 +15,7 @@ import {
   Right,
   Left,
   Content,
-  Card
+  Card,
 } from "native-base";
 // Screen Styles
 import styles from "./styles";
@@ -32,36 +32,41 @@ export default class Category extends Component {
       data_devotionals: [],
       fontLoaded: false,
       data: [],
-      refreshing: false
+      refreshing: false,
     };
   }
 
   componentDidMount() {
+    this.loadPage();
     this.getDevotionals();
   }
 
   getDevotionals() {
-    this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+    this.setState((prevState) => ({
+      refreshing: !prevState.refreshing,
+    }));
     fetch(GlobalVariables.apiDevotional)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ allDevotionals }) => {
         this.setState({
           data: allDevotionals,
-          refreshing: false
+          refreshing: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
-        this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+        this.setState((prevState) => ({
+          refreshing: !prevState.refreshing,
+        }));
       });
   }
 
-  async componentWillMount() {
+  async loadPage() {
     await Expo.Font.loadAsync({
       "SFUIDisplay-Medium": require("../../Fonts/SF-UI-Display-Medium.ttf"),
       "SFUIDisplay-Light": require("../../Fonts/SFUIDisplay-Light.ttf"),
       "SFUIDisplay-Regular": require("../../Fonts/SF-UI-Text-Regular.ttf"),
-      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf")
+      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf"),
     });
     this.setState({ fontLoaded: true });
   }
@@ -76,7 +81,7 @@ export default class Category extends Component {
               photo: item.photo,
               content: item.content,
               date: item.created_at,
-              pageTitle: "Devotionals"
+              pageTitle: "Devotionals",
             })
           }
         >
@@ -102,7 +107,7 @@ export default class Category extends Component {
       </View>
     );
   }
-  _keyExtractor = item => item._id;
+  _keyExtractor = (item) => item._id;
 
   render() {
     StatusBar.setBarStyle("light-content", true);

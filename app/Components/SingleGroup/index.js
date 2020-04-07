@@ -8,7 +8,7 @@ import {
   BackHandler,
   I18nManager,
   Dimensions,
-  AsyncStorage
+  AsyncStorage,
 } from "react-native";
 import {
   Container,
@@ -18,7 +18,7 @@ import {
   Body,
   Header,
   Input,
-  Item
+  Item,
 } from "native-base";
 // Screen Styles
 import styles from "./styles";
@@ -28,9 +28,9 @@ import moment from "moment";
 import { FlatList } from "react-native-gesture-handler";
 
 export default class NewsDetails extends Component {
-  componentWillMount() {
+  loadBackHandler() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       that.props.navigation.navigate("Social");
       return true;
     });
@@ -42,11 +42,12 @@ export default class NewsDetails extends Component {
       comments: [],
       comment: "",
       allowComments: false,
-      current: 0
+      current: 0,
     };
   }
 
   componentDidMount() {
+    this.loadBackHandler();
     //check if user is logged in
     this.confirmStatus();
     //get comments
@@ -70,7 +71,7 @@ export default class NewsDetails extends Component {
       name: "Chris Evans",
       comment,
       user_id: current % 2 === 0 ? 1 : 2,
-      created_at: moment().format("LLL")
+      created_at: moment().format("LLL"),
     };
     //Save comment to api
 
@@ -85,7 +86,7 @@ export default class NewsDetails extends Component {
       style={{
         padding: 12,
         backgroundColor: item.user_id === 1 ? "#316d9f" : "#0d1c3d",
-        flex: 1
+        flex: 1,
       }}
     >
       <View style={{ flexDirection: "row" }}>
@@ -98,7 +99,7 @@ export default class NewsDetails extends Component {
     </View>
   );
 
-  keyExtractor = item => item.firstName + item.lastName;
+  keyExtractor = (item) => item.firstName + item.lastName;
 
   render() {
     const { goBack } = this.props.navigation;
@@ -166,8 +167,8 @@ export default class NewsDetails extends Component {
                     {
                       textAlign: "center",
                       fontWeight: "700",
-                      fontSize: 18
-                    }
+                      fontSize: 18,
+                    },
                   ]}
                 >
                   Details
@@ -197,8 +198,8 @@ export default class NewsDetails extends Component {
                   {
                     textAlign: "center",
                     fontWeight: "700",
-                    fontSize: 18
-                  }
+                    fontSize: 18,
+                  },
                 ]}
               >
                 Members
@@ -212,7 +213,12 @@ export default class NewsDetails extends Component {
                 renderItem={this.renderItem.bind(this)}
                 keyExtractor={this.keyExtractor.bind(this)}
                 ItemSeparatorComponent={() => (
-                  <View style={{ height: 1, backgroundColor: "white" }} />
+                  <View
+                    style={{
+                      height: 1,
+                      backgroundColor: "white",
+                    }}
+                  />
                 )}
               />
             </View>

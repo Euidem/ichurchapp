@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   AsyncStorage,
-  I18nManager
+  I18nManager,
 } from "react-native";
 import { Container, Header, Body, Right, Left, Card } from "native-base";
 // Screen Styles
@@ -26,11 +26,12 @@ export default class News extends Component {
       fontLoaded: false,
       data: [],
       refreshing: false,
-      loggedIn: false
+      loggedIn: false,
     };
   }
 
   componentDidMount() {
+    this.loadPage();
     this.getDevotionals();
     this.confirmStatus();
   }
@@ -43,27 +44,31 @@ export default class News extends Component {
   }
 
   getDevotionals() {
-    this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+    this.setState((prevState) => ({
+      refreshing: !prevState.refreshing,
+    }));
     fetch(GlobalVariables.apiGroups)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ groups }) => {
         this.setState({
           data: groups,
-          refreshing: false
+          refreshing: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
-        this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+        this.setState((prevState) => ({
+          refreshing: !prevState.refreshing,
+        }));
       });
   }
 
-  async componentWillMount() {
+  async loadPage() {
     await Expo.Font.loadAsync({
       "SFUIDisplay-Medium": require("../../Fonts/SF-UI-Display-Medium.ttf"),
       "SFUIDisplay-Light": require("../../Fonts/SFUIDisplay-Light.ttf"),
       "SFUIDisplay-Regular": require("../../Fonts/SF-UI-Text-Regular.ttf"),
-      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf")
+      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf"),
     });
     this.setState({ fontLoaded: true });
   }
@@ -79,7 +84,7 @@ export default class News extends Component {
               description: item.groupDescription,
               date: item.created_at,
               item,
-              pageTitle: item.groupName
+              pageTitle: item.groupName,
             })
           }
         >
@@ -105,7 +110,7 @@ export default class News extends Component {
       </View>
     );
   }
-  _keyExtractor = item => item._id;
+  _keyExtractor = (item) => item._id;
 
   render() {
     StatusBar.setBarStyle("light-content", true);

@@ -6,7 +6,7 @@ import {
   Platform,
   TouchableOpacity,
   FlatList,
-  I18nManager
+  I18nManager,
 } from "react-native";
 import { Container, Header, Body, Right, Left, Card } from "native-base";
 // Screen Styles
@@ -24,36 +24,41 @@ export default class News extends Component {
       data_devotionals: [],
       fontLoaded: false,
       data: [],
-      refreshing: false
+      refreshing: false,
     };
   }
 
   componentDidMount() {
+    this.loadPage();
     this.getDevotionals();
   }
 
   getDevotionals() {
-    this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+    this.setState((prevState) => ({
+      refreshing: !prevState.refreshing,
+    }));
     fetch(GlobalVariables.apiNews)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ allNews }) => {
         this.setState({
           data: allNews,
-          refreshing: false
+          refreshing: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
-        this.setState(prevState => ({ refreshing: !prevState.refreshing }));
+        this.setState((prevState) => ({
+          refreshing: !prevState.refreshing,
+        }));
       });
   }
 
-  async componentWillMount() {
+  async loadPage() {
     await Expo.Font.loadAsync({
       "SFUIDisplay-Medium": require("../../Fonts/SF-UI-Display-Medium.ttf"),
       "SFUIDisplay-Light": require("../../Fonts/SFUIDisplay-Light.ttf"),
       "SFUIDisplay-Regular": require("../../Fonts/SF-UI-Text-Regular.ttf"),
-      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf")
+      "SFUIDisplay-Bold": require("../../Fonts/SFUIDisplay-Bold.ttf"),
     });
     this.setState({ fontLoaded: true });
   }
@@ -70,7 +75,7 @@ export default class News extends Component {
               date: item.created_at,
               comments: item.comments,
               pageTitle: item.title,
-              id: item._id
+              id: item._id,
             })
           }
         >
@@ -96,7 +101,7 @@ export default class News extends Component {
       </View>
     );
   }
-  _keyExtractor = item => item._id;
+  _keyExtractor = (item) => item._id;
 
   render() {
     StatusBar.setBarStyle("light-content", true);

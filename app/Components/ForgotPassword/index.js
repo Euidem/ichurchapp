@@ -7,7 +7,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   AsyncStorage,
-  I18nManager
+  I18nManager,
 } from "react-native";
 import {
   Container,
@@ -18,7 +18,7 @@ import {
   Left,
   Body,
   Spinner,
-  Form
+  Form,
 } from "native-base";
 // Screen Styles
 import styles from "../Signin_04/styles";
@@ -33,16 +33,16 @@ export default class ForgotPassword extends Component {
       email: "",
       password: "",
       loading: false,
-      successful: false
+      successful: false,
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     await Expo.Font.loadAsync({
       "SFUIDisplay-Medium": require("../../Fonts/SF-UI-Display-Medium.ttf"),
       "SFUIDisplay-Light": require("../../Fonts/SFUIDisplay-Light.ttf"),
       "SFUIDisplay-Regular": require("../../Fonts/SF-UI-Text-Regular.ttf"),
-      "SFUIDisplay-Semibold": require("../../Fonts/SFUIDisplay-Semibold.ttf")
+      "SFUIDisplay-Semibold": require("../../Fonts/SFUIDisplay-Semibold.ttf"),
     });
     this.setState({ fontLoaded: true });
   }
@@ -51,22 +51,22 @@ export default class ForgotPassword extends Component {
     const { email } = this.state;
     this.setState({ loading: true });
     let data = {
-      email
+      email,
     };
     //Call login API and redirect on success
     fetch(GlobalVariables.resetAPI, {
       method: "post",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res =>
-        res.json().then(result => {
+      .then((res) =>
+        res.json().then((result) => {
           this.setState({ loading: false, successful: true });
         })
       )
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         alert("error logging in");
       });
@@ -103,7 +103,7 @@ export default class ForgotPassword extends Component {
                 placeholder="Email"
                 autoCapitalize="none"
                 keyboardType="email-address"
-                onChangeText={email => this.setState({ email })}
+                onChangeText={(email) => this.setState({ email })}
                 style={styles.inputmain}
               />
             </Item>

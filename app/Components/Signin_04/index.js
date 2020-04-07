@@ -36,7 +36,7 @@ export default class Signin_04 extends Component {
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     await Expo.Font.loadAsync({
       "SFUIDisplay-Medium": require("../../Fonts/SF-UI-Display-Medium.ttf"),
       "SFUIDisplay-Light": require("../../Fonts/SFUIDisplay-Light.ttf"),

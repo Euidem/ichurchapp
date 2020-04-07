@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   BackHandler,
   FlatList,
-  I18nManager
+  I18nManager,
 } from "react-native";
 import { Container, Right, Left, Content, Body, Header } from "native-base";
 // Screen Styles
@@ -20,9 +20,9 @@ import { GlobalVariables } from "../../../globals";
  *  Social Screen
  */
 export default class Social03 extends Component {
-  componentWillMount() {
+  loadBackHandler() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       that.props.navigation.navigate("Social");
       return true;
     });
@@ -31,24 +31,25 @@ export default class Social03 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contribution_types: []
+      contribution_types: [],
     };
   }
 
   componentDidMount() {
+    this.loadBackHandler();
     fetch(GlobalVariables.apiPayments)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ types }) => {
         this.setState({
-          contribution_types: types
+          contribution_types: types,
         });
       })
-      .catch(error => console.warn(error));
+      .catch((error) => console.warn(error));
   }
 
-  clickEventListener = item => {
+  clickEventListener = (item) => {
     this.props.navigation.navigate("Payment", {
-      item: item
+      item: item,
     });
   };
 
@@ -82,7 +83,7 @@ export default class Social03 extends Component {
               style={styles.contentList}
               columnWrapperStyle={styles.listContainer}
               data={this.state.contribution_types}
-              keyExtractor={item => {
+              keyExtractor={(item) => {
                 return item._id;
               }}
               renderItem={({ item }) => {

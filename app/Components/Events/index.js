@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   BackHandler,
   FlatList,
-  I18nManager
+  I18nManager,
 } from "react-native";
 import {
   Container,
@@ -17,7 +17,7 @@ import {
   Content,
   Body,
   Header,
-  Card
+  Card,
 } from "native-base";
 // Screen Styles
 import styles from "./styles";
@@ -27,9 +27,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { GlobalVariables } from "../../../globals";
 
 export default class Social03 extends Component {
-  componentWillMount() {
+  componentDidMount() {
     var that = this;
-    BackHandler.addEventListener("hardwareBackPress", function() {
+    BackHandler.addEventListener("hardwareBackPress", function () {
       that.props.navigation.navigate("Social");
       return true;
     });
@@ -39,18 +39,18 @@ export default class Social03 extends Component {
     super(props);
     this.state = {
       events: [],
-      show_progressbar: true
+      show_progressbar: true,
     };
 
     fetch(GlobalVariables.apiEvents)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ events }) => {
         this.setState({ show_progressbar: false });
         this.setState({
-          events
+          events,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
         this.setState({ show_progressbar: false });
       });
@@ -65,7 +65,7 @@ export default class Social03 extends Component {
             photo: item.featuredImage,
             content: item.notes,
             item,
-            pageTitle: "Event Details"
+            pageTitle: "Event Details",
           })
         }
       >
@@ -98,7 +98,7 @@ export default class Social03 extends Component {
       </TouchableOpacity>
     );
   }
-  keyExtractor = item => item._id;
+  keyExtractor = (item) => item._id;
   render() {
     const { goBack } = this.props.navigation;
     const { navigation } = this.props;
