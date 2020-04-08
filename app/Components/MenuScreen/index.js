@@ -112,22 +112,20 @@ export default class MenuScreen extends Component {
     }
     return (
       <Container>
-        <Image
-          style={styles.headerImage}
-          source={require("../../../assets/sermons1.jpg")}
-        />
-        <View style={styles.main}>
-          <View style={{ flex: 1 }}>
-            <FlatList
-              refreshing={this.state.refreshing}
-              onRefresh={() => this.getSermons()}
-              data={this.state.data}
-              extraData={this.state.data}
-              renderItem={this.renderItem.bind(this)}
-              keyExtractor={this._keyExtractor.bind(this)}
-              enableEmptySections
-            />
-          </View>
+        <View style={{ flex: 1 }}>
+          <Image
+            style={styles.headerImage}
+            source={require("../../../assets/sermons1.jpg")}
+          />
+          <FlatList
+            refreshing={this.state.refreshing}
+            onRefresh={() => this.getSermons()}
+            data={this.state.data}
+            extraData={this.state.data}
+            renderItem={this.renderItem.bind(this)}
+            keyExtractor={this._keyExtractor.bind(this)}
+            enableEmptySections
+          />
         </View>
       </Container>
     );
