@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#2d324f",
     width: Metrics.WIDTH,
-    height: Metrics.HEIGHT
+    height: Metrics.HEIGHT,
   },
 
   header: {
@@ -17,35 +17,35 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {},
       android: {
-        marginTop: Fonts.moderateScale(25)
-      }
+        marginTop: Fonts.moderateScale(25),
+      },
     }),
-    elevation: 0
+    elevation: 0,
   },
   left: {
     flex: 0.5,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   backArrow: {
     width: 30,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   body: {
     flex: 3,
     alignItems: "center",
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   logosec: {
     width: Metrics.WIDTH,
     height: Metrics.WIDTH * 0.3,
-    justifyContent: "flex-end",
-    alignItems: "center"
+    justifyContent: "center",
+    alignItems: "center",
   },
   logostyle: {
     alignSelf: "center",
     width: Metrics.WIDTH * 0.25,
-    height: Metrics.WIDTH * 0.2
+    height: Metrics.WIDTH * 0.2,
   },
   form: {
     width: Metrics.WIDTH,
@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0)",
     borderColor: "transparent",
     justifyContent: "center",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   inputStyle: {
     borderColor: "transparent",
     justifyContent: "center",
     alignSelf: "center",
-    width: Metrics.WIDTH * 0.8
+    width: Metrics.WIDTH * 0.8,
   },
   inputmain: {
     fontFamily: Fonts.type.sfuiDisplayRegular,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     borderRadius: 40,
     width: Metrics.WIDTH * 0.8,
-    backgroundColor: "rgba(255,255,255,0.4)"
+    backgroundColor: "rgba(255,255,255,0.4)",
   },
   signInbtn: {
     backgroundColor: "#66b4ce",
@@ -81,37 +81,37 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     borderRadius: 40,
     width: Metrics.WIDTH * 0.8,
-    marginTop: 35
+    marginTop: 35,
   },
   buttongetstarted: {
     alignSelf: "center",
     justifyContent: "center",
     // fontFamily: Fonts.type.sfuiDisplaySemibold,
-    color: Colors.snow
+    color: Colors.snow,
   },
   buttongettext: {
     alignSelf: "center",
     justifyContent: "center",
     // fontFamily: Fonts.type.sfuiDisplaySemibold,
     color: Colors.white,
-    marginTop: 25
+    marginTop: 25,
   },
   errorText: {
     alignSelf: "center",
     justifyContent: "center",
     fontFamily: Fonts.type.sfuiDisplaySemibold,
     color: Colors.red,
-    marginTop: 25
+    marginTop: 25,
   },
   successText: {
     alignSelf: "center",
     justifyContent: "center",
     fontFamily: Fonts.type.sfuiDisplaySemibold,
     color: Colors.loginGreen,
-    marginTop: 25
+    marginTop: 25,
   },
   bottomView: {
-    marginTop: 30
+    marginTop: 30,
   },
   fbButton: {
     backgroundColor: "#3b5998",
@@ -123,12 +123,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   fbview: {
     flexDirection: "row",
     alignItems: "center",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   fbButtonText: {
     color: "#fff",
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     left: 10,
     fontFamily: Fonts.type.sfuiDisplayRegular,
     alignItems: "center",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   bottomText: {
     width: "100%",
@@ -145,19 +145,19 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     marginTop: 20,
-    flexDirection: "row"
+    flexDirection: "row",
   },
 
   bottomText01: {
     fontSize: Fonts.moderateScale(16),
     color: "#FFFFFF",
-    fontFamily: Fonts.type.sfuiDisplayRegular
+    fontFamily: Fonts.type.sfuiDisplayRegular,
   },
 
   bottomText02: {
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.sfuiDisplayRegular,
-    color: "#969696"
-  }
+    color: "#969696",
+  },
 });
 export default styles;

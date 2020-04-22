@@ -20,6 +20,7 @@ import SingleGroup from "./app/Components/SingleGroup";
 import ForgotPassword from "./app/Components/ForgotPassword";
 import Event from "./app/Components/Event";
 import Profile from "./app/Components/Profile";
+import Branches from "./app/Components/Branches";
 
 const AppNavigator = createStackNavigator({
   WalkthroughScreen: {
@@ -195,6 +196,14 @@ const AppNavigator = createStackNavigator({
 
   RegScreen: {
     screen: RegScreen,
+    navigationOptions: {
+      title: "",
+      header: null,
+      navigationBar: null,
+    },
+  },
+  Branches: {
+    screen: Branches,
     navigationOptions: {
       title: "",
       header: null,

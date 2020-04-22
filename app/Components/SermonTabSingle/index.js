@@ -6,14 +6,14 @@ import {
   ActivityIndicator,
   I18nManager,
   Share,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
 
 // Screen Styles
 import styles from "./styles";
 import { WebView } from "react-native-webview";
 import { View } from "react-native-animatable";
-import { Right, Left, Card, Body, Header, Icon } from "native-base";
+import { Right, Left, Card, Body, Header, Icon, Content } from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Metrics } from "../../Themes/";
@@ -22,7 +22,7 @@ export default class SermonTabSingle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
     };
     this.soundObject = new Audio.Sound();
   }
@@ -47,7 +47,7 @@ export default class SermonTabSingle extends Component {
     const audioUrl = this.props.navigation.getParam("audioUrl", "");
     try {
       await this.soundObject.loadAsync({
-        uri: audioUrl
+        uri: audioUrl,
       });
     } catch (error) {
       console.log(error);
@@ -68,7 +68,7 @@ export default class SermonTabSingle extends Component {
   onShare = (preacher, title) => {
     try {
       const result = Share.share({
-        message: `Enjoy this preaching from ${preacher} titled  ${title}. Get the the iChurch App on playstore now ! https://playstore.com/url`
+        message: `Enjoy this preaching from ${preacher} titled  ${title}. Get the the iChurch App on playstore now ! https://playstore.com/url`,
       });
 
       if (result.action === Share.sharedAction) {
@@ -97,7 +97,7 @@ export default class SermonTabSingle extends Component {
     const date = navigation.getParam("date", "");
     const { playing } = this.state;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <Header style={styles.header}>
           <Left style={styles.left}>
             <TouchableOpacity style={styles.backArrow} onPress={() => goBack()}>
@@ -117,55 +117,61 @@ export default class SermonTabSingle extends Component {
             </TouchableOpacity>
           </Right>
         </Header>
-        <View style={styles.rowBg}>
+
+        <Content>
           <View
             style={{
               height: Dimensions.get("window").height / 2,
-              width: Dimensions.get("window").width
+              width: Dimensions.get("window").width,
             }}
           >
             <WebView
               source={{
-                uri: youtubeUrl
+                uri: youtubeUrl,
               }}
             />
           </View>
+
           <Card
             style={{
               paddingTop: 30,
               paddingBottom: 30,
               paddingLeft: 8,
               paddingRight: 8,
-              margin: 10
+              margin: 10,
             }}
           >
             <View
               style={{
                 marginBottom: 30,
-                alignContent: "center"
+                alignContent: "center",
               }}
             >
-              <Text style={styles.textTitle}>Audio Recording</Text>
+              <Text style={[styles.textTitle, { color: "black" }]}>
+                Live Audio
+              </Text>
               {playing ? (
                 <TouchableHighlight
                   underlayColor="transparent"
                   onPress={this.pauseAudio}
+                  style={styles.audioIcon}
                 >
                   <Icon
                     name="pause-circle"
                     type="MaterialCommunityIcons"
-                    style={{ fontSize: 30 }}
+                    style={{ fontSize: 60 }}
                   />
                 </TouchableHighlight>
               ) : (
                 <TouchableHighlight
                   underlayColor="transparent"
                   onPress={this.playAudio}
+                  style={styles.audioIcon}
                 >
                   <Icon
                     name="ios-play-circle"
                     type="Ionicons"
-                    style={{ fontSize: 30 }}
+                    style={{ fontSize: 60 }}
                   />
                 </TouchableHighlight>
               )}
@@ -180,8 +186,8 @@ export default class SermonTabSingle extends Component {
                   styles.postAuthorDate,
                   {
                     color: "#adadad",
-                    marginLeft: Metrics.WIDTH * 0.025
-                  }
+                    marginLeft: Metrics.WIDTH * 0.025,
+                  },
                 ]}
               >
                 {date}
@@ -192,7 +198,7 @@ export default class SermonTabSingle extends Component {
               <Text style={{ marginTop: 15 }}></Text>
             </View>
           </Card>
-        </View>
+        </Content>
       </View>
     );
   }

@@ -82,61 +82,6 @@ export default class NewsDetails extends Component {
               <View style={styles.dividerHorizontal} />
             </View>
           </View>
-          {item && item._id ? (
-            <View
-              style={[styles.rowMainView, { marginTop: 20 }]}
-              animation="bounceInRight"
-              duration={100}
-              delay={400}
-            >
-              <View style={styles.lastRowBg}>
-                <View style={styles.rowDescView}>
-                  <Text
-                    style={[
-                      styles.rowDescTxt,
-                      {
-                        textAlign: "center",
-                        fontWeight: "700",
-                        fontSize: 18,
-                      },
-                    ]}
-                  >
-                    Details
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.sectionContainer}>
-                  <View>
-                    <Text style={styles.sectionTitle}>Start</Text>
-                    <Text>Date: {item.start.date}</Text>
-                    <Text>Time: {item.start.time}</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.sectionTitle}>End</Text>
-                    <Text>Date: {item.end.date}</Text>
-                    <Text>Time: {item.end.time}</Text>
-                  </View>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.sectionContainer}>
-                  <View>
-                    <Text style={styles.sectionTitle}>Location</Text>
-                    <Text>{item.location}</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.sectionTitle}>Cost</Text>
-                    <Text>{item.cost}</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.sectionTitle}>Recurring</Text>
-                    <Text>{item.recurring ? "Yes" : "No"}</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          ) : (
-            <Text></Text>
-          )}
         </Content>
       </Container>
     );

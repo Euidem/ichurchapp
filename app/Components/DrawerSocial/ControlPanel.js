@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   AsyncStorage,
   Alert,
-  Share
+  Share,
 } from "react-native";
 import { Container, Content } from "native-base";
 import styles from "./styles";
@@ -19,7 +19,7 @@ export default class ControlPanel extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      active: ""
+      active: "",
     };
   }
   componentDidMount() {
@@ -37,7 +37,7 @@ export default class ControlPanel extends Component {
     try {
       const result = Share.share({
         message:
-          "Hi Friend. Get the the iChurch App on playstore now ! https://playstore.com/url"
+          "Hi Friend. Get the the iChurch App on playstore now ! https://playstore.com/url",
       });
 
       if (result.action === Share.sharedAction) {
@@ -60,10 +60,10 @@ export default class ControlPanel extends Component {
     this.props.navigation.navigate("WalkthroughScreen");
   };
 
-  getActiveStyles = page => {
+  getActiveStyles = (page) => {
     const { active } = this.state;
     const activeStyles = {
-      fontWeight: "600"
+      fontWeight: "600",
     };
     return page === active ? activeStyles : {};
   };
@@ -129,9 +129,25 @@ export default class ControlPanel extends Component {
 
             <TouchableOpacity
               onPress={() => {
+                this.setState({ active: "branches" });
+                this.props.navigation.navigate("Branches");
+              }}
+            >
+              <View style={styles.listrow}>
+                <View style={styles.iconContainer}>
+                  <MaterialIcons name="equalizer" size={20} color="white" />
+                </View>
+                <Text style={[styles.rowtxt, this.getActiveStyles("branches")]}>
+                  Branch Locator
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
                 this.setState({ active: "events" });
                 this.props.navigation.navigate("Events", {
-                  showHeader: "show"
+                  showHeader: "show",
                 });
               }}
             >
