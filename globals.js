@@ -34,4 +34,5 @@ export class GlobalVariables {
     "https://ichurch-01.herokuapp.com/api/member/edit-member/";
   static branchesApi =
     "https://ichurch-01.herokuapp.com/api/branch/view-branches";
+  static tokenAPI = "https://ichurch-01.herokuapp.com/api/expo-token/add-token";
 }

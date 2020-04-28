@@ -6,20 +6,27 @@ import {
   Platform,
   TouchableOpacity,
   View,
+  Button,
+  Vibration,
   FlatList,
 } from "react-native";
 import { Content, Card, Container } from "native-base";
 // Screen Styles
 import styles from "./styles";
 import { GlobalVariables } from "../../../globals";
-import { AppLoading } from "expo";
+import { AppLoading, Notifications } from "expo";
 import moment from "moment";
+import * as Permissions from "expo-permissions";
+import Constants from "expo-constants";
+
 export default class MenuScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
       fontLoaded: false,
+      notification: {},
+      expoPushToken: "",
       data: [],
       refreshing: false,
     };
@@ -35,10 +42,69 @@ export default class MenuScreen extends Component {
     this.setState({ fontLoaded: true });
   }
 
+  registerForPushNotificationsAsync = async () => {
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        );
+        finalStatus = status;
+      }
+      if (finalStatus !== "granted") {
+        alert("Failed to get push token for push notification!");
+        return;
+      }
+      token = await Notifications.getExpoPushTokenAsync();
+      const data = {
+        token: {
+          token: "12121",
+        },
+      };
+      fetch(GlobalVariables.tokenAPI, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.setState({ expoPushToken: token });
+    }
+
+    if (Platform.OS === "android") {
+      Notifications.createChannelAndroidAsync("default", {
+        name: "default",
+        sound: true,
+        priority: "max",
+        vibrate: [0, 250, 250, 250],
+      });
+    }
+  };
+
   componentDidMount() {
+    this.registerForPushNotificationsAsync();
     this.loadPage();
     this.getSermons();
+    this._notificationSubscription = Notifications.addListener(
+      this._handleNotification
+    );
   }
+
+  _handleNotification = (notification) => {
+    Vibration.vibrate();
+    console.log(notification);
+    this.setState({ notification: notification });
+  };
 
   getSermons = () => {
     this.setState((prevState) => ({
