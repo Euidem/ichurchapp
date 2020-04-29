@@ -8,6 +8,7 @@ import {
   View,
   Button,
   Vibration,
+  AsyncStorage,
   FlatList,
 } from "react-native";
 import { Content, Card, Container } from "native-base";
@@ -43,6 +44,11 @@ export default class MenuScreen extends Component {
   }
 
   registerForPushNotificationsAsync = async () => {
+    const oldToken = await AsyncStorage.getItem("expoToken");
+    if (oldToken) {
+      return;
+    }
+
     if (Constants.isDevice) {
       const { status: existingStatus } = await Permissions.getAsync(
         Permissions.NOTIFICATIONS
@@ -55,7 +61,6 @@ export default class MenuScreen extends Component {
         finalStatus = status;
       }
       if (finalStatus !== "granted") {
-        alert("Failed to get push token for push notification!");
         return;
       }
       token = await Notifications.getExpoPushTokenAsync();
@@ -71,7 +76,7 @@ export default class MenuScreen extends Component {
       })
         .then((response) => response.json())
         .then((result) => {
-          //console.log(result);
+          AsyncStorage.setItem("expoToken", token);
         })
         .catch((error) => {
           console.log(error);
