@@ -60,9 +60,7 @@ export default class MenuScreen extends Component {
       }
       token = await Notifications.getExpoPushTokenAsync();
       const data = {
-        token: {
-          token: "12121",
-        },
+        token,
       };
       fetch(GlobalVariables.tokenAPI, {
         method: "post",
@@ -73,7 +71,7 @@ export default class MenuScreen extends Component {
       })
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
+          //console.log(result);
         })
         .catch((error) => {
           console.log(error);
