@@ -35,4 +35,5 @@ export class GlobalVariables {
   static branchesApi =
     "https://ichurch-01.herokuapp.com/api/branch/view-branches";
   static tokenAPI = "https://ichurch-01.herokuapp.com/api/expo-token/add-token";
+  static checkInAPI = "https://ichurch-01.herokuapp.com/api/attendance/check-in/";
 }

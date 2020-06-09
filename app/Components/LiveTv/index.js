@@ -4,13 +4,14 @@ import {
   Dimensions,
   TouchableOpacity,
   I18nManager,
-  ActivityIndicator
+  AsyncStorage,
+  Alert
 } from "react-native";
 
 // Screen Styles
 import styles from "./styles";
 import { View } from "react-native-animatable";
-import { Right, Left, Body, Header, Spinner } from "native-base";
+import { Right, Left, Body, Header, Spinner, Button } from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { GlobalVariables } from "../../../globals";
 import { WebView } from "react-native-webview";
@@ -39,7 +40,18 @@ export default class SermonTabSingle extends Component {
         alert("error loadinig live video");
       });
   }
-
+  memberCheckIn = async () => {
+    const userId = await AsyncStorage.getItem("user_id");
+    const url = `${ GlobalVariables.checkInAPI }${ userId }`;
+    console.log(url)
+    fetch(url, {
+      method: 'POST'
+    }).then(res => res.json()).then(result => {
+      Alert.alert("Success", result.message)
+    }).catch(error => {
+      console.log(error)
+    })
+  }
   render() {
     const { goBack } = this.props.navigation;
     const { data_live_tv, loading } = this.state;
@@ -51,15 +63,15 @@ export default class SermonTabSingle extends Component {
               {I18nManager.isRTL ? (
                 <MaterialIcons name="chevron-right" size={45} color="white" />
               ) : (
-                <MaterialIcons name="chevron-left" size={45} color="white" />
-              )}
+                  <MaterialIcons name="chevron-left" size={45} color="white" />
+                )}
             </TouchableOpacity>
           </Left>
-          <Body style={styles.body}>
-            <Text style={styles.textTitle}> Live TV</Text>
-          </Body>
+
           <Right style={styles.right}>
-            <TouchableOpacity onPress={() => alert("Share")}></TouchableOpacity>
+            <Button onPress={this.memberCheckIn}>
+              <Text style={[styles.textTitle, { fontWeight: '600' }]}>Check In</Text>
+            </Button>
           </Right>
         </Header>
 
@@ -67,15 +79,15 @@ export default class SermonTabSingle extends Component {
           {loading ? (
             <Spinner />
           ) : (
-            <View
-              style={{
-                height: Dimensions.get("window").height,
-                width: Dimensions.get("window").width
-              }}
-            >
-              <WebView source={{ uri: data_live_tv }} />
-            </View>
-          )}
+              <View
+                style={{
+                  height: Dimensions.get("window").height,
+                  width: Dimensions.get("window").width
+                }}
+              >
+                <WebView source={{ uri: data_live_tv }} />
+              </View>
+            )}
         </View>
       </View>
     );

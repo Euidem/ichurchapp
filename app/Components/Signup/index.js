@@ -101,25 +101,22 @@ export default class Signup extends Component {
             Alert.alert(
               "Registration successful, you will receive an email with your log in details once your account has been approved"
             );
-            this.setState({ loading: false });
             this.props.navigation.navigate("LoginScreen");
+            this.setState({ loading: false });
           } else {
             Alert.alert(result.message);
+            this.setState({ loading: false });
           }
         })
       )
       .catch((error) => {
-        console.log("Error registering, please try again");
+        alert("Error registering, please try again");
+        this.setState({ loading: false });
       });
   };
   render() {
     const { fontLoaded, loading } = this.state;
-
-    let BG_Image = require("../../../assets/churchbg.jpg");
-    let ic_logo = {
-      uri:
-        "https://antiqueruby.aliansoftware.net/Images/signin/ic_logo_mountify_signin_four.png",
-    };
+    let ic_logo = require("../../../assets/full.png");
     StatusBar.setBarStyle("light-content", true);
 
     if (Platform.OS === "android") {
@@ -275,16 +272,16 @@ export default class Signup extends Component {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                info
-                style={styles.signInbtn}
-                onPress={this.register}
-              >
-                <Text autoCapitalize="words" style={styles.buttongetstarted}>
-                  Register
+                <TouchableOpacity
+                  info
+                  style={styles.signInbtn}
+                  onPress={this.register}
+                >
+                  <Text autoCapitalize="words" style={styles.buttongetstarted}>
+                    Register
                 </Text>
-              </TouchableOpacity>
-            )}
+                </TouchableOpacity>
+              )}
           </Form>
         </Content>
       </Container>

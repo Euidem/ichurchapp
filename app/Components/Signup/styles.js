@@ -42,8 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logostyle: {
-    alignSelf: "center",
-    width: Metrics.WIDTH * 0.25,
+    width: Metrics.WIDTH * 0.75,
     height: Metrics.WIDTH * 0.2,
   },
   form: {

@@ -6,6 +6,7 @@ import {
   Platform,
   ImageBackground,
   TouchableOpacity,
+  Image,
   AsyncStorage,
   I18nManager,
 } from "react-native";
@@ -85,12 +86,7 @@ export default class Signin_04 extends Component {
   };
   render() {
     const { fontLoaded, loading, incorrect } = this.state;
-
-    let BG_Image = require("../../../assets/churchbg.jpg");
-    let ic_logo = {
-      uri:
-        "https://antiqueruby.aliansoftware.net/Images/signin/ic_logo_mountify_signin_four.png",
-    };
+    let ic_logo = require("../../../assets/full.png");
     StatusBar.setBarStyle("light-content", true);
 
     if (Platform.OS === "android") {
@@ -111,6 +107,7 @@ export default class Signin_04 extends Component {
             <Right style={styles.right} />
           </Header>
           <View style={styles.logosec}>
+            <Image source={ic_logo} style={styles.logostyle} />
             <Text style={{ color: "#fff" }}>SIGN IN</Text>
           </View>
           <Form style={styles.form}>
@@ -141,16 +138,16 @@ export default class Signin_04 extends Component {
                 </Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                info
-                style={styles.signInbtn}
-                onPress={() => this.login()}
-              >
-                <Text autoCapitalize="words" style={styles.buttongetstarted}>
-                  Sign In
+                <TouchableOpacity
+                  info
+                  style={styles.signInbtn}
+                  onPress={() => this.login()}
+                >
+                  <Text autoCapitalize="words" style={styles.buttongetstarted}>
+                    Sign In
                 </Text>
-              </TouchableOpacity>
-            )}
+                </TouchableOpacity>
+              )}
             {incorrect && (
               <Text autoCapitalize="words" style={styles.errorText}>
                 Wrong email/password combination
