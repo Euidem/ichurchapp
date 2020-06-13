@@ -91,7 +91,7 @@ export default class Social03 extends Component {
           />
           <View style={styles.descriptionView}>
             <Text numberOfLines={3} style={styles.rowDescTxt}>
-              {item.notes.replace(/<\/?[^>]+(>|$)/g, "")}
+              {item.notes}
             </Text>
           </View>
         </Card>
@@ -121,8 +121,8 @@ export default class Social03 extends Component {
                 {I18nManager.isRTL ? (
                   <MaterialIcons name="chevron-right" size={45} color="white" />
                 ) : (
-                  <MaterialIcons name="chevron-left" size={45} color="white" />
-                )}
+                    <MaterialIcons name="chevron-left" size={45} color="white" />
+                  )}
               </TouchableOpacity>
             </Left>
             <Body style={styles.body}>
