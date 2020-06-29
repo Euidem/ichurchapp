@@ -86,7 +86,7 @@ export default class News extends Component {
                 {item.title}
               </Text>
               <Text numberOfLines={3} style={styles.comment}>
-                {item.content}
+                {item.content.replace(/<\/?[^>]+(>|$)/g, '').replace(/&nbsp;/g, " ")}
               </Text>
               <View style={styles.followContent}>
                 <View style={styles.likeContent}>
@@ -126,8 +126,8 @@ export default class News extends Component {
               {I18nManager.isRTL ? (
                 <MaterialIcons name="chevron-right" size={45} color="white" />
               ) : (
-                <MaterialIcons name="chevron-left" size={45} color="white" />
-              )}
+                  <MaterialIcons name="chevron-left" size={45} color="white" />
+                )}
             </TouchableOpacity>
           </Left>
           <Body style={styles.body}>

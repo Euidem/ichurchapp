@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   BackHandler,
   I18nManager,
+  StyleSheet,
   AsyncStorage,
 } from "react-native";
 import {
@@ -28,6 +29,8 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import moment from "moment";
 import { FlatList } from "react-native-gesture-handler";
 import { GlobalVariables } from "../../../globals";
+import HTMLView from 'react-native-htmlview';
+
 export default class NewsDetails extends Component {
   loadBackHandler() {
     var that = this;
@@ -53,7 +56,7 @@ export default class NewsDetails extends Component {
     this.getComments();
   }
 
-  async confirmStatus() {
+  confirmStatus = async () => {
     let userId = await AsyncStorage.getItem("user_id");
     if (userId) {
       this.setState({ allowComments: true });
@@ -73,7 +76,7 @@ export default class NewsDetails extends Component {
     const data = {
       comment,
     };
-    fetch(`${GlobalVariables.apiNewsComment}/${this.state.newsId}`, {
+    fetch(`${ GlobalVariables.apiNewsComment }/${ this.state.newsId }`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -110,6 +113,12 @@ export default class NewsDetails extends Component {
 
   keyExtractor = (item) => item;
 
+  renderNode = (node, index, siblings, parent, defaultRenderer) => {
+    if (node.name === 'br') {
+      return null
+    }
+  }
+
   render() {
     const { goBack } = this.props.navigation;
     const { navigation } = this.props;
@@ -117,7 +126,7 @@ export default class NewsDetails extends Component {
     const photo = navigation.getParam("photo", "");
     const content = navigation.getParam("content", "");
     const pageTitle = navigation.getParam("pageTitle", "");
-
+    const htmlContent = `<html>${ content }</html>`;
     StatusBar.setBarStyle("light-content", true);
     if (Platform.OS === "android") {
       StatusBar.setBackgroundColor("#2d324f", true);
@@ -134,8 +143,8 @@ export default class NewsDetails extends Component {
               {I18nManager.isRTL ? (
                 <MaterialIcons name="chevron-right" size={45} color="white" />
               ) : (
-                <MaterialIcons name="chevron-left" size={45} color="white" />
-              )}
+                  <MaterialIcons name="chevron-left" size={45} color="white" />
+                )}
             </TouchableOpacity>
           </Left>
           <Body style={styles.body}>
@@ -152,13 +161,15 @@ export default class NewsDetails extends Component {
           >
             <View style={styles.lastRowBg}>
               <Image source={{ uri: photo }} style={styles.postDescImage} />
-              <Text style={styles.rowPostDescription}>
-                {title.replace(/<\/?[^>]+(>|$)/g, "")}
+              <Text style={[styles.rowPostDescription, { fontSize: 24, fontWeight: '600', textAlign: 'center' }]}>
+                {title}
               </Text>
               <View style={styles.rowDescView}>
-                <Text style={styles.rowDescTxt}>
-                  {content.replace(/<\/?[^>]+(>|$)/g, "")}
-                </Text>
+                <HTMLView
+                  value={htmlContent}
+                  stylesheet={htmlStyles}
+                  renderNode={this.renderNode}
+                />
               </View>
               <View style={styles.dividerHorizontal} />
               <View style={styles.likeCommentShareView}></View>
@@ -188,35 +199,38 @@ export default class NewsDetails extends Component {
           </View>
           {allowComments ? (
             <Form
-              style={{
-                bottom: 0,
-                position: "fixed",
-                width: "100%",
-              }}
+
             >
               <Item regular>
                 <Input
                   placeholder="Write comment"
                   onChangeText={(text) => this.setState({ comment: text })}
                   returnKeyType="send"
-                  onSubmitEditing={this.submit.bind(this)}
+                  onSubmitEditing={this.submit}
                   value={comment}
                 />
               </Item>
             </Form>
           ) : (
-            <TouchableOpacity
-              info
-              style={styles.signInbtn}
-              onPress={() => this.props.navigation.navigate("LoginScreen")}
-            >
-              <Text autoCapitalize="words" style={styles.buttongetstarted}>
-                Sign In to make comments
+              <TouchableOpacity
+                info
+                style={styles.signInbtn}
+                onPress={() => this.props.navigation.navigate("LoginScreen")}
+              >
+                <Text autoCapitalize="words" style={styles.buttongetstarted}>
+                  Sign In to make comments
               </Text>
-            </TouchableOpacity>
-          )}
+              </TouchableOpacity>
+            )}
         </Content>
       </Container>
     );
   }
 }
+
+const htmlStyles = StyleSheet.create({
+  p: {
+    fontSize: 16,
+    textAlign: 'justify'
+  },
+});

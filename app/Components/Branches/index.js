@@ -88,8 +88,8 @@ export default class Branches extends Component {
               {I18nManager.isRTL ? (
                 <MaterialIcons name="chevron-right" size={45} color="white" />
               ) : (
-                <MaterialIcons name="chevron-left" size={45} color="white" />
-              )}
+                  <MaterialIcons name="chevron-left" size={45} color="white" />
+                )}
             </TouchableOpacity>
           </Left>
           <Body style={styles.body}>
@@ -101,7 +101,7 @@ export default class Branches extends Component {
           region={this.state.region}
           showsUserLocation
           loadingEnabled
-          onRegionChange={this.onRegionChange}
+          //onRegionChange={this.onRegionChange}
           style={{ height: Dimensions.get("window").height }}
         >
           {this.state.branches.map((branch) => (

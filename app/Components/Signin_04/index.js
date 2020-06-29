@@ -86,7 +86,7 @@ export default class Signin_04 extends Component {
   };
   render() {
     const { fontLoaded, loading, incorrect } = this.state;
-    let ic_logo = require("../../../assets/full.png");
+    let ic_logo = require("../../../assets/whitelogo.png");
     StatusBar.setBarStyle("light-content", true);
 
     if (Platform.OS === "android") {

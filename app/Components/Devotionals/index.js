@@ -92,7 +92,7 @@ export default class Category extends Component {
                 {item.title}
               </Text>
               <Text numberOfLines={3} style={styles.comment}>
-                {item.content}
+                {item.content.replace(/<\/?[^>]+(>|$)/g, '').replace(/&nbsp;/g, " ")}
               </Text>
               <View style={styles.followContent}>
                 <View style={styles.likeContent}>
@@ -133,8 +133,8 @@ export default class Category extends Component {
                 {I18nManager.isRTL ? (
                   <MaterialIcons name="chevron-right" size={45} color="white" />
                 ) : (
-                  <MaterialIcons name="chevron-left" size={45} color="white" />
-                )}
+                    <MaterialIcons name="chevron-left" size={45} color="white" />
+                  )}
               </TouchableOpacity>
             </Left>
             <Body style={styles.body}>
@@ -143,8 +143,8 @@ export default class Category extends Component {
             <Right style={styles.right}></Right>
           </Header>
         ) : (
-          <View></View>
-        )}
+            <View></View>
+          )}
         <View style={{ flex: 1 }}>
           {!this.state.refreshing && this.state.data.length === 0 && (
             <Text>No devotionals available</Text>

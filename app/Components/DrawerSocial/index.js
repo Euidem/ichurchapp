@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, BackHandler, Image } from "react-native";
+import { View, Text, TouchableOpacity, BackHandler, Image, Dimensions } from "react-native";
 import { Right, Header, Left, Body } from "native-base";
 const drawerStyles = {
   drawer: {
@@ -21,11 +21,11 @@ export default class DrawerSocial extends Component {
     super(props, context);
     this.state = {
       drawerType: "static",
-      openDrawerOffset: 180,
+      openDrawerOffset: Dimensions.get('window').width > 400 ? 180 : 100,
       closedDrawerOffset: 0,
       panOpenMask: 0.1,
       relativeDrag: false,
-      panThreshold: 0.25,
+      panThreshold: 0.55,
       tweenHandlerOn: false,
       tweenDuration: 350,
       tweenEasing: "linear",
