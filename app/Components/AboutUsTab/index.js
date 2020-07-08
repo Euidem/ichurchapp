@@ -52,7 +52,7 @@ export default class Social05 extends Component {
       .then((res) => res.json())
       .then(({ about }) => {
         this.setState({
-          data_about: about[0],
+          data_about: about[0] || {},
         });
       })
       .catch((error) => {
@@ -131,7 +131,7 @@ export default class Social05 extends Component {
           <View tabLabel="About Us">
             <ScrollView>
               <View style={styles2.rowBg}>
-                {item.postImage == "" ? null : (
+                {item.photo == "" ? null : (
                   <Image
                     style={styles2.postDescImage}
                     source={{ uri: item.photo }}

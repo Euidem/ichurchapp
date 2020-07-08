@@ -146,13 +146,13 @@ export default class Category extends Component {
             <View></View>
           )}
         <View style={{ flex: 1 }}>
-          {!this.state.refreshing && this.state.data.length === 0 && (
-            <Text>No devotionals available</Text>
-          )}
           <Image
             style={styles.headerImage}
             source={require("../../../assets/devotionals.jpeg")}
           />
+          {!this.state.refreshing && this.state.data.length === 0 && (
+            <Text>No devotionals available</Text>
+          )}
           <FlatList
             data={this.state.data}
             onRefresh={() => this.getDevotionals()}
