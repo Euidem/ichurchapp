@@ -150,9 +150,11 @@ export default class Category extends Component {
             style={styles.headerImage}
             source={require("../../../assets/devotionals.jpeg")}
           />
-          {!this.state.refreshing && this.state.data.length === 0 && (
-            <Text>No devotionals available</Text>
-          )}
+          {!this.state.refreshing && this.state.data.length === 0 ? (
+            <View style={{display:'flex', justifyContent:'center', alignContent:'center', flex:1, alignItems:'center'}}> 
+              <Text style={{fontSize:20, fontWeight:'600'}} >No devotionals available</Text>
+            </View>
+          ) : 
           <FlatList
             data={this.state.data}
             onRefresh={() => this.getDevotionals()}
@@ -162,6 +164,7 @@ export default class Category extends Component {
             enableEmptySections
             keyExtractor={this._keyExtractor.bind(this)}
           />
+  }
         </View>
       </Container>
     );

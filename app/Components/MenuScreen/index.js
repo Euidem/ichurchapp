@@ -186,6 +186,11 @@ export default class MenuScreen extends Component {
             style={styles.headerImage}
             source={require("../../../assets/sermons1.jpg")}
           />
+           {!this.state.refreshing && this.state.data.length === 0 ? (
+            <View style={{display:'flex', justifyContent:'center', alignContent:'center', flex:1, alignItems:'center'}}> 
+              <Text style={{fontSize:20, fontWeight:'600'}} >No sermons available</Text>
+            </View>
+          ) : 
           <FlatList
             refreshing={this.state.refreshing}
             onRefresh={() => this.getSermons()}
@@ -195,6 +200,7 @@ export default class MenuScreen extends Component {
             keyExtractor={this._keyExtractor.bind(this)}
             enableEmptySections
           />
+           }
         </View>
       </Container>
     );
