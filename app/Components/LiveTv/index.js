@@ -85,7 +85,7 @@ export default class SermonTabSingle extends Component {
                   width: Dimensions.get("window").width
                 }}
               >
-                <WebView source={{ uri: data_live_tv }} />
+                <WebView allowsFullscreenVideo={true} source={{ uri: data_live_tv }} />
               </View>
             )}
         </View>
