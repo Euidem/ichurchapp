@@ -225,6 +225,7 @@ export default class Signup extends Component {
                 selectedValue={this.state.gender}
                 onValueChange={this.onValueChange2.bind(this, "gender")}
               >
+                <Picker.Item label="Select Gender" value="" />
                 <Picker.Item label="Male" value="male" />
                 <Picker.Item label="Female" value="female" />
                 <Picker.Item label="Others" value="others" />
@@ -243,6 +244,7 @@ export default class Signup extends Component {
                 selectedValue={this.state.maritalStatus}
                 onValueChange={this.onValueChange2.bind(this, "maritalStatus")}
               >
+                <Picker.Item label="Choose Marital Status" value="" />
                 <Picker.Item label="Married" value="married" />
                 <Picker.Item label="Single" value="single" />
                 <Picker.Item label="Divorced" value="divorced" />
